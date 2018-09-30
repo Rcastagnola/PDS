@@ -17,34 +17,12 @@ O1 = O0 + fr *2*np.pi /N
 
 x = a0*np.sin(O1)
 
-i = -1
-j = -1
+
 
 c = np.zeros((200, 1000))
 
-for x in O1:
-    i = i+1    
-    for y in tt:
-        j = j+1
-        c[i,j] = x*y
 
 
-
-
-
-#asd = a0*np.sin(2*np.pi*f0*tt)
-
-#wind = signal.hamming(N)
-
-#hamming = np.multiply(asd,wind)
-
-#plt.plot(hamming)
-#plt.show()
-
-#sp = np.fft.fft(hamming)
-
-#plt.plot(np.absolute(sp)[0:500])
-#plt.show()
 
 
 
