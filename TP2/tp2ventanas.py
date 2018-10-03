@@ -46,10 +46,12 @@ hann     = Hann(N,señal)
 blackman = Blackman(N,señal)
 flattop  = Flattop(N,señal)
 
-sp1 = np.fft.fft(bartlett)
-sp2 = np.fft.fft(hann)
-sp3 = np.fft.fft(blackman)
-sp4 = np.fft.fft(flattop)
+sp1 = np.fft.fft(bartlett,2048)/25.5
+sp2 = np.fft.fft(hann,2048)/25.5
+sp3 = np.fft.fft(blackman,2048)/25.5
+sp4 = np.fft.fft(flattop,2048)/25.5
+
+freq = np.linspace(0, 1, 100)
 
 plt.title('Ventana Bartlett' )
 plt.ylabel("Amplitude")
@@ -59,7 +61,7 @@ plt.show()
 plt.title('Espectro' )
 plt.ylabel("Magnitud [dB]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp1)[0:500]))
+plt.plot(freq, 20*np.log10(np.absolute(sp1)[0:100]))
 plt.show()
 
 plt.title('Ventana Hann' )
@@ -70,7 +72,7 @@ plt.show()
 plt.title('Espectro' )
 plt.ylabel("Magnitud [dB]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp2)[0:500]))
+plt.plot(freq, 20*np.log10(np.absolute(sp2)[0:100]))
 plt.show()
 
 plt.title('Ventana Blackman' )
@@ -81,7 +83,7 @@ plt.show()
 plt.title('Espectro' )
 plt.ylabel("Magnitud [dB]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp3)[0:500]))
+plt.plot(freq, 20*np.log10(np.absolute(sp3)[0:100]))
 plt.show()
 
 plt.title('Ventana Flat-top' )
@@ -92,7 +94,7 @@ plt.show()
 plt.title('Espectro' )
 plt.ylabel("Magnitud [dB]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp4)[0:500]))
+plt.plot(freq, 20*np.log10(np.absolute(sp4)[0:100]))
 plt.show()
 
 

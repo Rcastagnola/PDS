@@ -16,10 +16,7 @@ x1 = np.sin(O1*tt)
 
 x2 = a2*np.sin(O2*tt)
 
-a = np.array(x1)
-b = np.array(x2)
-
-x = a + b
+x = x1 + x2
 
 sp1 = np.fft.fft(x1)
 plt.title('Señal X1' )
@@ -28,11 +25,9 @@ plt.xlabel("Tiempo")
 plt.plot(tt,x1)
 plt.show()
 plt.title('Espectro' )
-plt.ylabel("Magnitud [dB]")
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp1)[0:500]))
-plt.show()
-plt.stem(np.absolute(sp1)[0:500])
+plt.stem(np.absolute(sp1)[0:50])
 plt.show()
 
 
@@ -43,11 +38,9 @@ plt.xlabel("Tiempo")
 plt.plot(tt,x2)
 plt.show()
 plt.title('Espectro' )
-plt.ylabel("Magnitud [dB]")
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp2)[0:500]))
-plt.show()
-plt.stem(np.absolute(sp2)[0:500])
+plt.stem(np.absolute(sp2)[0:50])
 plt.show()
 
 
@@ -58,23 +51,16 @@ plt.xlabel("Tiempo")
 plt.plot(tt,x)
 plt.show()
 plt.title('Espectro' )
-plt.ylabel("Magnitud [dB]")
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp3)[0:500]))
-plt.show()
-plt.stem(np.absolute(sp3)[0:500])
+plt.stem(np.absolute(sp3)[0:50])
 plt.show()
 
 ma = np.absolute(sp3)[0:500]
 asd = max(ma)
 
 
-count = -1
-for x in ma:
-    count = 1+count   
-    if x == asd:       
-        frec = count
-        
+
 
 
 
