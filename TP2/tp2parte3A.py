@@ -46,7 +46,6 @@ def Flattop (N,x):
 N = 1000
 fs = 1000
 a0 = 2
-f0 = 10
 
 tt = np.linspace (0,((N-1)*(1/fs)),N)
 
