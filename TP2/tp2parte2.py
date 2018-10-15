@@ -57,13 +57,6 @@ xB = x1 + x2B
 
 sp4 = np.fft.fft(xB)
 
-grillado = np.around(x)
-error = grillado - x
-
-plt.title('Histograma -40db' )
-plt.hist(error)
-plt.show()
-
 
 
 
