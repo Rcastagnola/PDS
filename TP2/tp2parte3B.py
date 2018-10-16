@@ -3,6 +3,14 @@ import matplotlib.pylab as plt
 import scipy.signal as signal
 import statistics as stats
 
+def Rectangular (N,x):
+    
+    ventana = signal.boxcar(N)
+    
+    salida = np.multiply(x,ventana)
+
+    return salida
+
 def Bartlett (N,x):
     
     ventana = signal.bartlett(N)
@@ -45,8 +53,8 @@ tt = np.linspace (0,((N-1)*(1/fs)),N)
 
 fr = np.random.uniform(-2, 2, 200)
 
-O0 = np.pi /2
-O1 = O0 + fr *2*np.pi /N
+O0 = 2*np.pi*(fs/4)
+O1 = O0 + fr*2*np.pi
 
 a = np.array([O1])
 
