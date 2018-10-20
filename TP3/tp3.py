@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt
 import scipy.integrate as integrate
-import statistics as stats
+from numpy.fft import fft 
 
 N = 1000
 fs = 1000
@@ -15,6 +15,9 @@ dp = (np.absolute(sp))**2
 
 asd = sum(dp)/200
 
-Var  = stats.variance(asd)
-
 Esp  = stats.median(asd)
+
+dada = abs((fft(señal))**2)/N
+
+variance = np.var(asd)
+
