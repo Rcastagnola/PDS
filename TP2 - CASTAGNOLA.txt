@@ -1,0 +1,1 @@
+https://nbviewer.jupyter.org/github/rcastagnola/PDS/blob/master/TP2/TP2%20-%20Ventanas%20-%20Castagnola.ipynb

@@ -118,6 +118,20 @@ plt.xlabel("Frequencia")
 plt.plot(freq, 20*np.log10(np.absolute(sp4)[0:100]))
 plt.show()
 
+maximo0 = 20*np.log10(np.absolute(sp0))
+maximo1 = 20*np.log10(np.absolute(sp1))
+maximo2 = 20*np.log10(np.absolute(sp2))
+maximo3 = 20*np.log10(np.absolute(sp3))
+maximo4 = 20*np.log10(np.absolute(sp4))
+
+maxi0 = max(20*np.log10(np.absolute(sp0[2:1024])))
+maxi1 = max(20*np.log10(np.absolute(sp1[4:1024])))
+maxi2 = max(20*np.log10(np.absolute(sp2[5:1024])))
+maxi3 = max(20*np.log10(np.absolute(sp3[6:1024])))
+maxi4 = max(20*np.log10(np.absolute(sp4[11:1024])))
+
+
+
 
 
 
