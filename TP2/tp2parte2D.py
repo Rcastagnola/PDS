@@ -42,162 +42,135 @@ def Flattop (N,x):
 
     return salida
 
+def normalize(d):
+    d -= np.min(d, axis=0)
+    d /= np.ptp(d, axis=0)
+    return d
+
 N = 1000
 fs = 1000
 tt = np.linspace (0,((N-1)*(1/fs)),N)
 
 ################################################
-AmplitudB = [110,120,130,285,300]
+AmplitudBEj2D = [110,120,130,285,300]
 
-ArrayB = np.array([AmplitudB])
+ArrayBEj2D = np.array([AmplitudBEj2D])
 
-a2B = 10**(-ArrayB/20)
-O1B = 2*np.pi*(fs/4)
-O2B = O1B + 10*2*np.pi
+a2BEj2D = 10**(-ArrayBEj2D/20)
+O1BEj2D = 2*np.pi*(fs/4)
+O2BEj2D = O1BEj2D + 10*2*np.pi
 
-x1B = np.sin(O1B*tt)
+x1BEj2D = np.sin(O1BEj2D*tt)
 
-x2B = a2B.T*np.sin(O2B*tt)
+x2BEj2D = a2BEj2D.T*np.sin(O2BEj2D*tt)
 
-xB = x1B + x2B
+xBEj2D = x1BEj2D + x2BEj2D
 #################################################
-AmplitudC = [30,20,30,35]
+AmplitudCEj2D = [50,60,70,80,90,100,110,120]
 
-ArrayC = np.array([AmplitudC])
+ArrayCEj2D = np.array([AmplitudCEj2D])
 
-a2C = 10**(-ArrayC/20)
-O1C = 2*np.pi*(fs/4) + 0.5*2*np.pi
-O2C = O1C + 10 *2*np.pi
+a2CEj2D = 10**(-ArrayCEj2D/20)
+O1CEj2D = 2*np.pi*(fs/4) + 0.5*2*np.pi
+O2CEj2D = O1CEj2D + 10 *2*np.pi
 
-x1C = np.sin(O1C*tt)
+x1CEj2D = np.sin(O1CEj2D*tt)
 
-x2C = a2C.T*np.sin(O2C*tt)
+x2CEj2D = a2CEj2D.T*np.sin(O2CEj2D*tt)
 
-xC = x1C + x2C
+xCEj2D = x1CEj2D + x2CEj2D
 #################################################
 
-rectangularB = Rectangular(N,xB)
-bartlettB = Bartlett(N,xB)
-hannB     = Hann(N,xB)
-blackmanB = Blackman(N,xB)
-flattopB  = Flattop(N,xB)
+rectangularBEj2D = Rectangular(N,xBEj2D)
+bartlettBEj2D = Bartlett(N,xBEj2D)
+hannBEj2D     = Hann(N,xBEj2D)
+blackmanBEj2D = Blackman(N,xBEj2D)
+flattopBEj2D  = Flattop(N,xBEj2D)
 
-sp0B = np.fft.fft(rectangularB)
-sp1B = np.fft.fft(bartlettB)
-sp2B = np.fft.fft(hannB)
-sp3B = np.fft.fft(blackmanB)
-sp4B = np.fft.fft(flattopB)
+sp0BEj2D = np.fft.fft(rectangularBEj2D)
+sp1BEj2D = np.fft.fft(bartlettBEj2D)
+sp2BEj2D = np.fft.fft(hannBEj2D)
+sp3BEj2D = np.fft.fft(blackmanBEj2D)
+sp4BEj2D = np.fft.fft(flattopBEj2D)
 
 plt.title('Ventana rectangular con -300db' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp0B[4,])[200:300]))
+Nsp0BEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp0BEj2D[4,]))])))
+plt.plot(Nsp0BEj2D[200:300])
 plt.show()
 
 plt.title('Ventana bartlett con -285db' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp1B[3,])[200:300]))
+Nsp1BEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp1BEj2D[3,]))])))
+plt.plot(Nsp1BEj2D[200:300])
 plt.show()
 
 plt.title('Ventana hanning con -110db' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp2B[0,])[200:300]))
+Nsp2BEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp2BEj2D[0,]))])))
+plt.plot(Nsp2BEj2D[200:300])
 plt.show()
 
 plt.title('Ventana blackman con -120db' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp3B[1,])[200:300]))
+Nsp3BEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp3BEj2D[1,]))])))
+plt.plot(Nsp3BEj2D[200:300])
 plt.show()
 
 plt.title('Ventana flat-top con -130db' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp4B[2,])[200:300]))
+Nsp4BEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp4BEj2D[2,]))])))
+plt.plot(Nsp4BEj2D[200:300])
 plt.show()
 ###################################################
-rectangularC = Rectangular(N,xC)
-bartlettC = Bartlett(N,xC)
-hannC     = Hann(N,xC)
-blackmanC = Blackman(N,xC)
-flattopC  = Flattop(N,xC)
+rectangularCEj2D = Rectangular(N,xCEj2D)
+bartlettCEj2D = Bartlett(N,xCEj2D)
+hannCEj2D     = Hann(N,xCEj2D)
+blackmanCEj2D = Blackman(N,xCEj2D)
+flattopCEj2D  = Flattop(N,xCEj2D)
 
-sp0C = np.fft.fft(rectangularC)
-sp1C = np.fft.fft(bartlettC)
-sp2C = np.fft.fft(hannC)
-sp3C = np.fft.fft(blackmanC)
-sp4C = np.fft.fft(flattopC)
+sp0CEj2D = np.fft.fft(rectangularCEj2D)
+sp1CEj2D = np.fft.fft(bartlettCEj2D)
+sp2CEj2D = np.fft.fft(hannCEj2D)
+sp3CEj2D = np.fft.fft(blackmanCEj2D)
+sp4CEj2D = np.fft.fft(flattopCEj2D)
 
-plt.title('Ventana rectangular con -30db' )
-plt.ylabel("Magnitud [db]")
+plt.title('Ventana rectangular con -50db' )
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.stem((np.absolute(sp0C[0,])[240:270]))
+Nsp0CEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp0CEj2D[0,]))])))
+plt.plot((Nsp0CEj2D[240:270]))
 plt.show()
 
-plt.title('Ventana bartlett con -30db' )
-plt.ylabel("Magnitud [db]")
+plt.title('Ventana bartlett con -60db' )
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.stem((np.absolute(sp1C[0,])[240:270]))
+Nsp1CEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp1CEj2D[1,]))])))
+plt.plot((Nsp1CEj2D[240:270]))
 plt.show()
 
-plt.title('Ventana hanning con -asddb30db' )
-plt.ylabel("Magnitud [db]")
+plt.title('Ventana hanning con -80db' )
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.stem((np.absolute(sp2C[0,])[240:270]))
+Nsp2CEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp2CEj2D[3,]))])))
+plt.plot((Nsp2CEj2D[240:270]))
 plt.show()
 
-plt.title('Ventana blackman con -30db' )
-plt.ylabel("Magnitud [db]")
+plt.title('Ventana blackman con -90db' )
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.stem((np.absolute(sp3C[0,])[240:270]))
+Nsp3CEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp3CEj2D[4,]))])))
+plt.plot((Nsp3CEj2D[240:270]))
 plt.show()
 
-plt.title('Ventana flat-top con -30db' )
-plt.ylabel("Magnitud [db]")
+plt.title('Ventana flat-top con -120db' )
+plt.ylabel("Magnitud")
 plt.xlabel("Frequencia")
-plt.stem((np.absolute(sp4C[0,])[240:270]))
+Nsp4CEj2D = 20*np.log10(np.transpose(([normalize(np.absolute(sp4CEj2D[7,]))])))
+plt.plot((Nsp4CEj2D[240:270]))
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

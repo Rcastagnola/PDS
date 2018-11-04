@@ -68,3 +68,7 @@ for i3 in range (7):
             señal3 = acumuladoC/(K3*U*L3[i3])
             variance3[i3] = np.var(señal3)
             bias3[i3] = np.mean(señal3/(2*np.pi*L3[i3]*U))
+
+            
+            
+

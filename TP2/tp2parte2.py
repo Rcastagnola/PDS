@@ -4,6 +4,10 @@ import scipy.signal as signal
 import scipy.integrate as integrate
 import statistics as stats
 
+def normalize(d):
+    d -= np.min(d, axis=0)
+    d /= np.ptp(d, axis=0)
+    return d
 
 N = 1000
 fs = 1000
@@ -25,7 +29,8 @@ sp1 = np.fft.fft(x1)
 plt.title('Espectro X1' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp1)[200:300]))
+Nsp1 = 20*np.log10(np.transpose(([normalize(np.absolute(sp1))])))
+plt.plot(Nsp1[200:300])
 plt.show()
 
 
@@ -33,7 +38,8 @@ sp2 = np.fft.fft(x2)
 plt.title('Espectro X2' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp2)[200:300]))
+Nsp2 = 20*np.log10(np.transpose(([normalize(np.absolute(sp2))])))
+plt.plot(Nsp2[200:300])
 plt.show()
 
 
@@ -41,7 +47,8 @@ sp3 = np.fft.fft(x)
 plt.title('Espectro X' )
 plt.ylabel("Magnitud [db]")
 plt.xlabel("Frequencia")
-plt.plot(20*np.log10(np.absolute(sp3)[200:300]))
+Nsp3 = 20*np.log10(np.transpose(([normalize(np.absolute(sp3))])))
+plt.plot(Nsp3[200:300])
 plt.show()
 
 
@@ -57,7 +64,12 @@ xB = x1 + x2B
 
 sp4 = np.fft.fft(xB)
 
-
+plt.title('Espectro Atenuado' )
+plt.ylabel("Magnitud [db]")
+plt.xlabel("Frequencia")
+Nsp4 = 20*np.log10(np.transpose(([normalize(np.absolute(sp4[5,]))])))
+plt.plot(Nsp4[200:300])
+plt.show()
 
 
 
