@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pylab as plt
 import scipy.integrate as integrate
 import scipy.signal as sig
+import spectrum as sp
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -36,35 +37,54 @@ acumuladoC = np.zeros((R))
 bartlett2 = Bartlett(L3,1)
 U = sum(bartlett2**2)/L3
 
-for j in range(K3):
-    for m in range(S):
-        ruido = np.random.normal(0,2,N)
-        fr = np.random.uniform(-0.5, 0.5, 1)
-        O0 = 2*np.pi*(fs/4)
-        O1 = O0 + fr*2*np.pi
-        señal = a0*np.sin(O1*tt) + ruido
-        bartlett1 = Bartlett(L3/S,señal[R*m:R*m+R])
-        actualC = np.absolute((np.fft.fft(bartlett1))**2)
-        acumuladoC += actualC
+frec = np.zeros(200)
+
+for h in range(200):
+    for j in range(K3):
+        for m in range(S):
+            ruido = np.random.normal(0,2,N)
+            fr = np.random.uniform(-0.5, 0.5, 1)
+            O0 = 2*np.pi*(fs/4)
+            O1 = O0 + fr*2*np.pi
+            señal = a0*np.sin(O1*tt) + ruido
+            bartlett1 = Bartlett(L3/S,señal[R*m:R*m+R])
+            actualC = np.absolute((np.fft.fft(bartlett1))**2)
+            acumuladoC += actualC
         
+    señal3 = acumuladoC/(K3*U*L3)
+    maximoA = max(señal3)
+    countA = -1
+    for x in señal3[0:125]:
+        countA = 1+countA   
+        if x == maximoA:       
+            frec[h] = countA*4
+
+variance3 = np.var(frec)
+
+
+
+#################################################################
+frecB = np.zeros(20)
+
+for j in range(20):
+    ruidoB = np.random.normal(0,2,N)
+    frB = np.random.uniform(-0.5, 0.5, 1)
+    O0B = 2*np.pi*(fs/4)
+    O1B = O0B + frB*2*np.pi
+    señalB = a0*np.sin(O1B*tt) + ruidoB
+    pARMA = sp.parma(señalB, 8, 8, 30, NFFT=N)
+    
+    maximoB = max(pARMA.psd)
+    countB = -1
+    for x in pARMA.psd[0:500]:
+        countB = 1+countB   
+        if x == maximoB:       
+            frecB[j] = countB
+
+variance4 = np.var(frecB)
+    
+
         
-        
-señal3 = acumuladoC/(K3*U*L3)
-variance3 = np.var(señal3)
-bias3 = np.mean(señal3/(2*np.pi*L3*U))
-
-argmax = max(señal3)
-
-psds = 10*np.log10(np.transpose(np.vstack([normalize(señal3)])))
-
-plt.plot(psds)
-plt.xlabel('frec. [Hz]')
-plt.ylabel('PSD [W/Hz]')
-plt.grid(which='both', axis='both')
-plt.ylim([-50, 10])
-
-
-
 
 
 
