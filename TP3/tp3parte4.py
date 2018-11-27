@@ -74,6 +74,8 @@ maximoRui3db = max(20*np.log10(RuiProm3db))
         
 varianceA = np.var(frecA)
 
+SesgoA = sum(frecA - 250) / 200
+
 
 
 #################################################################
@@ -99,6 +101,8 @@ for j in range(Repeticiones):
         
                
 varianceB = np.var(frecB)   
+
+SesgoB = sum(frecB - 250) / 200
     
 ###################################################################    
 
@@ -146,7 +150,9 @@ maximoSen10db = max(20*np.log10(SenProm10db))
 maximoRui10db = max(20*np.log10(RuiProm10db))
         
         
-varianceC = np.var(frecC)  
+varianceC = np.var(frecC) 
+
+SesgoC = sum(frecC - 250) / 200 
 
 ####################################################################
 
@@ -171,6 +177,8 @@ for l in range(Repeticiones):
         
                
 varianceD = np.var(frecD)
+
+SesgoD = sum(frecD - 250) / 200
 
 
 
