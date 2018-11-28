@@ -17,8 +17,19 @@ mat_struct = sio.loadmat('ECG_TP4.mat')
 
 señal = mat_struct['ecg_lead']
 señal = señal.flatten(1)
+
+sio.whosmat('ECG_TP4.mat')
+loc_lat = sio.loadmat('ECG_TP4.mat')
+
+latidos = loc_lat['qrs_detections']
+latidos = latidos.flatten(1)
+
 N = len(señal)
 
 fs = 1000 # Hz
 nyq_frec = fs / 2
 
+#plt.figure(1)
+#plt.plot(señal[1150:1250])
+
+latidos_50 = latidos - 50
