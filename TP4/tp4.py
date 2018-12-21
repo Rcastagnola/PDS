@@ -85,12 +85,12 @@ plt.grid(which='both', axis='both')
 
 plt.show()
 
-ww4, hh4 = sig.freqz(np.array([1,0,0,0,-1]), [1])
+ww4, hh4 = sig.freqz(np.array([1,0,0,0,-1]), [1,0,1])
 ww4 = ww4 / np.pi
 
 plt.figure(7)
 
-plt.plot(ww,(abs(hh4)))
+plt.plot(ww4,(abs(hh4)))
 
 plt.title('N=4')
 plt.xlabel('Frequencia normalizada')
@@ -100,6 +100,7 @@ plt.grid(which='both', axis='both')
 
 plt.figure(8)
 plt.plot(ww4, 20 * np.log10(abs(hh4)))
+
 
 plt.title('N=4')
 plt.xlabel('Frequencia normalizada')
